@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Interfaz con dos cajas de texto</title>
+  <style>
+    @font-face {
+      font-family: 'Boska';
+      src: url('font/Boska-Bold.otf') format('opentype');
+      font-weight: bold;
+    }
+
+    body {
+      background-color: #001f3f;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    textarea {
+      width: 200px;
+      height: 80px;
+      font-family: 'Boska', sans-serif;
+      font-size: 20px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      resize: none;
+      margin-bottom: 10px;
+    }
+
+    #canvasWrapper {
+      width: 400px;
+      height: 400px;
+      border: 2px solid #ccc;
+      position: relative;
+      margin-top: 20px;
+      background-color: #001f3f;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .textDiv {
+      position: absolute;
+      font-family: 'Boska', sans-serif;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: white;
+      width: 50%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <textarea id="textArea1" placeholder="Texto arriba izquierda"></textarea>
+  <textarea id="textArea2" placeholder="Texto abajo derecha"></textarea>
+
+  <div id="canvasWrapper"></div>
+
+  <script>
+    const canvasWrapper = document.getElementById('canvasWrapper');
+
+    // Crear divs para mostrar los textos
+    const textDisplay1 = document.createElement('div');
+    textDisplay1.classList.add('textDiv');
+    textDisplay1.style.top = '0';
+    textDisplay1.style.left = '0';
+    canvasWrapper.appendChild(textDisplay1);
+
+    const textDisplay2 = document.createElement('div');
+    textDisplay2.classList.add('textDiv');
+    textDisplay2.style.bottom = '0';
+    textDisplay2.style.right = '0';
+    textDisplay2.style.textAlign = 'right';
+    canvasWrapper.appendChild(textDisplay2);
+
+    // Obtener textareas
+    const textArea1 = document.getElementById('textArea1');
+    const textArea2 = document.getElementById('textArea2');
+
+    // Función para actualizar los textos
+    function updateTexts() {
+      textDisplay1.textContent = textArea1.value;
+      textDisplay2.textContent = textArea2.value;
+    }
+
+    textArea1.addEventListener('input', updateTexts);
+    textArea2.addEventListener('input', updateTexts);
+
+    // Inicializar
+    updateTexts();
+  </script>
+
+</body>
+</html>
